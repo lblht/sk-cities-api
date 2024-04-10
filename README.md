@@ -1,4 +1,4 @@
-API that returns cities in Slovakia.
+# API for cities in Slovakia.
 
 Available on: https://sk-cities-api.onrender.com
 
