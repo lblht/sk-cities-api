@@ -1,6 +1,6 @@
 # API for cities in Slovakia.
 
-Available on: https://sk-cities-api.onrender.com
+Available on: https://sk-cities-api.onrender.com (initial load may take a while, the api might have been put to sleep).
 
 For all the cities get '/all'. For a random city get '/random'.
 You can also filter the results using county or region.
