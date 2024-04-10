@@ -57,4 +57,4 @@ app.get('/random', (req, res) => {
     else { res.send(cities[Math.floor(Math.random() * cities.length)]); }
 });
 
-app.listen(PORT, () => console.log(`Server running on port: http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
