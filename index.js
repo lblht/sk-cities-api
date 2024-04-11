@@ -30,7 +30,7 @@ const filterCities = (req) => {
     if (format === 'geojson') {
         if (county) { filteredCities = citiesGeojson.features.filter(city => city.properties.county === county); } 
         else if (region) { filteredCities = citiesGeojson.features.filter(city => city.properties.region === region); } 
-        else { filteredCities = citiesGeojson }
+        else { filteredCities = citiesGeojson.features }
     }
     else {
         if (county) { filteredCities = citiesJson.filter(city => city.county === county); } 
@@ -45,13 +45,14 @@ app.get('/all', (req, res) => {
     const { format } = req.query;
     let cities = filterCities(req);
     if (cities.length === 0) { res.status(400).send({ error: 'Incorrect filter values (county or region). No cities found.' }); return; }
-    if (format === 'geojson') { res.send({type: "FeatureCollection", crs: { type: "name", properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" } }, features: cities.features }); } 
+    if (format === 'geojson') { res.send({type: "FeatureCollection", crs: { type: "name", properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" } }, features: cities }); } 
     else { res.send(cities); }
 });
 
 app.get('/random', (req, res) => {
     const { format } = req.query;
     let cities = filterCities(req);
+    console.log(cities);
     if (cities.length === 0) { res.status(400).send({ error: 'Incorrect filter values (county or region). No cities found.' }); return; }
     if (format === 'geojson') { res.send({type: "FeatureCollection", crs: { type: "name", properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" } }, features: cities[Math.floor(Math.random() * cities.length)] }); } 
     else { res.send(cities[Math.floor(Math.random() * cities.length)]); }
