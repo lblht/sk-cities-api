@@ -55,7 +55,7 @@ app.get('/random', (req, res) => {
     let cities = filterCities(req);
     console.log(cities);
     if (cities.length === 0) { res.status(400).send({ error: 'Incorrect filter values (county or region). No cities found.' }); return; }
-    if (format === 'geojson') { res.send({type: "FeatureCollection", crs: { type: "name", properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" } }, features: cities[Math.floor(Math.random() * cities.length)] }); } 
+    if (format === 'geojson') { res.send({type: "FeatureCollection", crs: { type: "name", properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" } }, features: [cities[Math.floor(Math.random() * cities.length)]] }); } 
     else { res.send(cities[Math.floor(Math.random() * cities.length)]); }
 });
 
