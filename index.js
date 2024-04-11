@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors"
 import fs from "fs";
 
 const app = express();
@@ -17,7 +18,7 @@ fs.readFile('slovakia-cities.geojson', 'utf8', (err, data) => {
     citiesJson = citiesGeojson.features.map(feature => feature.properties);
 });
 
-app.use(bodyParser.json());
+app.use(bodyParser.json(), cors());
 
 app.get('/', (req, res) => {
     res.send("<p><b>This is an API that returns cities in Slovakia.</b></p><p><br>For all the cities get '/all'. For a random city get '/random'.<br>You can also filter the results using county or region.<br>Example: '/all?region=Trnavský' returns all cities in the Trnava region.<br>Response is available in two formats, JSON or GEOJSON. JSON is the default, for GEOJSON use 'format=geojson'.<br>Example: '/random?county=Pezinok&format=geojson' returns a random city in the Pezinok county in GEOJSON format.</p>")
